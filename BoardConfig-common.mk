@@ -365,6 +365,21 @@ BOARD_VENDOR_KERNEL_MODULES := $(KERNEL_MODULES)
 
 # Using BUILD_COPY_HEADERS
 BUILD_BROKEN_USES_BUILD_COPY_HEADERS := true
+DISABLE_ARTIFACT_PATH_REQUIREMENTS := true
+
+# Kernel
+BOARD_KERNEL_IMAGE_NAME := Image.lz4
+TARGET_KERNEL_CONFIG := slider_gki_defconfig
+TARGET_KERNEL_SOURCE := kernel/google/gs101/private/gs-google
+TARGET_NEEDS_DTBOIMAGE := true
+
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(TARGET_KERNEL_DIR)/Image.lz4
+PRODUCT_COPY_FILES += \
+    $(TARGET_PREBUILT_KERNEL):kernel \
+
+# Kernel modules
+TARGET_KERNEL_EXT_MODULE_ROOT := kernel/google/gs101/private/google-modules
 
 include device/google/gs101-sepolicy/gs101-sepolicy.mk
 
@@ -379,4 +394,4 @@ BOARD_PVMFWIMAGE_PARTITION_SIZE := 0x00100000
 
 -include vendor/google_devices/gs-common/proprietary/BoardConfigVendor.mk
 
-include device/google/gs101/BoardConfig-calyx.mk
+include device/google/gs101/BoardConfig-evolution.mk
